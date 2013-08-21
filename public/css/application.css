@@ -1,9 +1,11 @@
-.container {
+.board {
   margin: 20px auto;
-  width: 600px;
-  padding: 0px 20px 20px 20px;
-  border: 1px dotted black;
+  width: 800px;
+  height: 800px;
+  position: relative;
 }
-th {
-  text-align: left;
+
+.square {
+  position: absolute;
+  border: 2px solid black;
 }

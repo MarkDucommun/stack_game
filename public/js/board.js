@@ -18,14 +18,17 @@ Board.prototype.startPlay = function(){
     if(e.keyCode == 87){
       this.movePieces('up')
       this.isGameFinished()
+      this.ui.paint(this.level)
     }
     if(e.keyCode == 68){
       this.movePieces('right')
       this.isGameFinished()
+      this.ui.paint(this.level)
     }
     if(e.keyCode == 83){
       this.movePieces('down')
       this.isGameFinished()
+      this.ui.paint(this.level)
     }
   })  
 }
