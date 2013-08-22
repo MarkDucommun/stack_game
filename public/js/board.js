@@ -18,22 +18,22 @@ Board.prototype.startPlay = function(){
     console.log(keystrokes.length)
     if(e.keyCode == 65){
       board.movePieces('left')
-      // board.isGameFinished()
+      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 87){
       board.movePieces('up')
-      // board.isGameFinished()
+      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 68){
       board.movePieces('right')
-      // board.isGameFinished()
+      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 83){
       board.movePieces('down')
-      // board.isGameFinished()
+      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
   })  
@@ -117,11 +117,15 @@ Board.prototype.isGameFinished = function(){
   var aPiece = undefined
   var pieces = this.level.getPieces()
   for(var i = 0; i < pieces.length; i++){
-    if(piece instanceof Movable){
-      aPiece |= pieces[i]
-      // if(!this.onSameCoordinates(aPiece))
+    if(pieces[i] instanceof Movable){
+      aPiece |= pieces
+      console.log(pieces)
+      if(!this.onSameCoordinates(aPiece, pieces[i])){
+        return false
+      }
     }
   }
+  return true
 }
 
 Board.prototype.onSameCoordinates = function(pieceA, pieceB){
