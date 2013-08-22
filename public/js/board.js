@@ -1,52 +1,53 @@
 function Board(levelData){
   this.setupBoard(levelData)
-  this.beginPlay()
+  this.startPlay()
 }
 
 Board.prototype.setupBoard = function(levelData){
   this.level = new Level(levelData)
-  //give a representation of the level to ui
+  this.screenUtil = new ScreenUtil(levelData['size'])
+  this.screenUtil.colorGrid(this.packageLevel())
 }
 
 Board.prototype.startPlay = function(){
+  var board = this
   $(document).on('keyup', function(e){
     if(e.keyCode == 65){
-      this.movePieces('left')
-      this.isGameFinished()
-      this.ui.paint(this.level)
+      board.movePieces('left')
+      // board.isGameFinished()
+      board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 87){
-      this.movePieces('up')
-      this.isGameFinished()
-      this.ui.paint(this.level)
+      board.movePieces('up')
+      // board.isGameFinished()
+      board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 68){
-      this.movePieces('right')
-      this.isGameFinished()
-      this.ui.paint(this.level)
+      board.movePieces('right')
+      // board.isGameFinished()
+      board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 83){
-      this.movePieces('down')
-      this.isGameFinished()
-      this.ui.paint(this.level)
+      board.movePieces('down')
+      // board.isGameFinished()
+      board.screenUtil.colorGrid(board.packageLevel())
     }
   })  
 }
 
 Board.prototype.movePieces = function(direction){
-  var pieces = this.level.getPieces() // returns array of pieces
-  // target the location each movable piece will potentially move to
+  var pieces = this.level.getPieces()
   for(i in pieces){
     var piece = pieces[i]
     if(piece instanceof Movable){
-      this.movePiece(piece)      
+      this.movePiece(piece, direction)      
     }
   } 
 }
 
-Board.prototype.movePiece = function(){
+Board.prototype.movePiece = function(piece, direction){
   var potentialMove = this.calculateMove(piece, direction)
-  if(this.noConflicts(potentialMove, pieces)){
+  if(this.noConflicts(potentialMove, this.level.getPieces())){
     piece.setCoordinates(potentialMove)
   }
 }
@@ -105,4 +106,25 @@ Board.prototype.calculateMove = function(piece, direction){
       break;
   }
   return coord
+}
+
+Board.prototype.packageLevel = function(){
+  var levelData = []
+  this.level.getPieces().forEach(function(piece, index, array){
+    levelData.push(this.packagePiece(piece))
+  }, this)
+  return levelData
+}
+
+Board.prototype.packagePiece = function(piece){
+  var pieceData = {}
+  pieceData['x'] = piece.getX()
+  pieceData['y'] = piece.getY()
+  if(piece instanceof Movable){
+    pieceData['color'] = 'red'
+  }
+  else{
+    pieceData['color'] = 'black'
+  }
+  return pieceData
 }

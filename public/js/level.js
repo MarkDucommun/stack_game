@@ -1,6 +1,6 @@
 function Level(levelData){
-  this.setDimensionX(levelData['xDimension'])
-  this.setDimensionY(levelData['yDimension'])
+  this.setDimensionX(levelData['size']['x'])
+  this.setDimensionY(levelData['size']['y'])
   this.createPieces(levelData['pieces'])
 }
 
@@ -23,7 +23,9 @@ Level.prototype.createPieces = function(piecesData){
 Level.prototype.createPiece = function(pieceData){
   var e = eval
   var piece = e('new ' + pieceData['type'] 
-      + '(' + pieceData['coordinates'] + ')')
+      + '(' + pieceData['x'] + ',' + pieceData['y'] + ')')
+  console.log(piece)
+  return piece
 }
 
 Level.prototype.getDimensionX = function(){
