@@ -3,6 +3,8 @@ function ScreenUtil(levelDimensions){
   this.appendGrid()
 }
 
+var borders = 20
+
 ScreenUtil.prototype.setGridCharacteristics = function(levelDimensions){
   this.setDimensionX(levelDimensions['x'])
   this.setDimensionY(levelDimensions['y'])
@@ -18,15 +20,13 @@ ScreenUtil.prototype.appendGrid = function(){
 }
 
 ScreenUtil.prototype.colorGrid = function(levelData){
+  $('.square').css('background', 'none')
   levelData.forEach(this.colorDiv, this)
 }
 
 ScreenUtil.prototype.colorDiv = function(pieceData, index, array){
-  console.log(pieceData)
   divID = this.getID(pieceData['x'], pieceData['y'])
   color = pieceData['color']
-  console.log('#sq' + divID)
-  console.log(color)
   $('#sq' + divID).css('background', color)
 }
 
@@ -35,11 +35,13 @@ ScreenUtil.prototype.createDiv = function(id){
   var height = this.getSquareHeight()
   var xPos = this.getPositionX(id) 
   var yPos = this.getPositionY(id)
+ 
   var square = $('<div class="square" id="sq' + id + '"></div>')
     .css('width', width)
     .css('height', height)
-    .css('left', (width + 4) * xPos)
-    .css('bottom', (height + 4) * yPos)
+    .css('left', (width + borders) * xPos)
+    .css('bottom', (height + borders) * yPos)
+ 
   return square
 }
 
@@ -69,12 +71,12 @@ ScreenUtil.prototype.getNumDivs = function(){
 
 ScreenUtil.prototype.setSquareHeight = function(){
   var totalHeight = parseInt($('.board').css('height'), 10)
-  this.squareHeight = totalHeight / this.getDimensionY() - 4
+  this.squareHeight = totalHeight / this.getDimensionY() - borders
 }
 
 ScreenUtil.prototype.setSquareWidth = function(){
   var totalWidth = parseInt($('.board').css('width'), 10)
-  this.squareWidth = totalWidth / this.getDimensionX() - 4
+  this.squareWidth = totalWidth / this.getDimensionX() - borders
 }
 
 ScreenUtil.prototype.getSquareHeight = function(){

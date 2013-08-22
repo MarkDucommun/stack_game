@@ -11,7 +11,11 @@ Board.prototype.setupBoard = function(levelData){
 
 Board.prototype.startPlay = function(){
   var board = this
+  var keystrokes = []
   $(document).on('keyup', function(e){
+    
+    keystrokes.push(e.keyCode)
+    console.log(keystrokes.length)
     if(e.keyCode == 65){
       board.movePieces('left')
       // board.isGameFinished()
@@ -85,27 +89,47 @@ Board.prototype.isNotOnObstacle = function(potentialMove){
 
 Board.prototype.calculateMove = function(piece, direction){
   var coord = {}
+
   switch(direction){
     case 'left':
-      coord['x'] = piece.getX - 1
-      coord['y'] = piece.getY
+      coord['x'] = piece.getX() - 1
+      coord['y'] = piece.getY()
       break;
     case 'up':
-      coord['x'] = piece.getX
-      coord['y'] = piece.getY + 1
+      coord['x'] = piece.getX()
+      coord['y'] = piece.getY() + 1
       break;
 
     case 'right':
-      coord['x'] = piece.getX + 1
-      coord['y'] = piece.getY
+      coord['x'] = piece.getX() + 1
+      coord['y'] = piece.getY()
       break;
 
     case 'down':
-      coord['x'] = piece.getX
-      coord['y'] = piece.getY - 1
+      coord['x'] = piece.getX()
+      coord['y'] = piece.getY() - 1
       break;
   }
   return coord
+}
+
+Board.prototype.isGameFinished = function(){
+  var aPiece = undefined
+  var pieces = this.level.getPieces()
+  for(var i = 0; i < pieces.length; i++){
+    if(piece instanceof Movable){
+      aPiece |= pieces[i]
+      // if(!this.onSameCoordinates(aPiece))
+    }
+  }
+}
+
+Board.prototype.onSameCoordinates = function(pieceA, pieceB){
+  if(pieceA.getX() === pieceB.getX() 
+    && pieceA.getY() === pieceB.getY()){
+    return true
+  }
+  return false
 }
 
 Board.prototype.packageLevel = function(){
