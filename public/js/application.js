@@ -15,6 +15,7 @@ $(document).ready(function() {
   // if(location.href === '/level/'){
     var id = $('.level').data('level')
     $.get('/level_data/' + id, function(levelData){
+      $('.board').css('width', $('.board').css('height'))
       board = new Board(levelData)
     }, 'json')
   // }
@@ -44,23 +45,32 @@ $(document).ready(function() {
     size['x'] = $('input[name="d"]').val()
     size['y'] = $('input[name="d"]').val()
     name = $('input[name="name"]').val()
-   
+
+    var box_height = parseInt($('.board').css('height'), 10)
+    var screen_width = parseInt($('.create').css('width'), 10)
+    var left_margin = (screen_width - box_height) / 2
+    var button_left = (screen_width / 2) - 50
+    $('.board')
+      .css('width', box_height + 'px')
+      .css('margin-left', left_margin + 'px')
+
     var util = new ScreenUtil(size, true)
     
     var pieces = []
     
-    var button = $('<button id="push_grid">Create Grid</button>').click(function(event){
-      $.each($('.square'), function(i, div){
-        piece = piecify(div)
-        if(piece['piece'] !== 'none'){
-          pieces.push(piece)
-        }
+    var button = $('<button id="push_grid">Create Grid</button>')
+      .css('left', button_left)
+      .click(function(event){
+        $.each($('.square'), function(i, div){
+          piece = piecify(div)
+          if(piece['piece'] !== 'none'){
+            pieces.push(piece)
+          }
+        })
+        $.post('/create', {size: size, pieces: pieces, name: name}, function(level_id){
+          location.href = '/level/' + level_id
+        })
       })
-      $.post('/create', {size: size, pieces: pieces, name: name}, function(level_id){
-        console.log(level_id)
-        location.href = '/level/' + level_id
-      })
-    })
 
     $('.create').append(button)
 
