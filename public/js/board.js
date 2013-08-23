@@ -11,32 +11,35 @@ Board.prototype.setupBoard = function(levelData){
 
 Board.prototype.startPlay = function(){
   var board = this
-  var keystrokes = []
-  $(document).on('keyup', function(e){
-    
-    keystrokes.push(e.keyCode)
-    console.log(keystrokes.length)
+  this.keystrokes = ""
+  $(document).keyup(function(e){
     if(e.keyCode == 65){
+      board.keystrokes += "0"
       board.movePieces('left')
-      console.log(board.isGameFinished())
+      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 87){
+      board.keystrokes += "1"
       board.movePieces('up')
-      console.log(board.isGameFinished())
+      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 68){
+      board.keystrokes += "2"
       board.movePieces('right')
-      console.log(board.isGameFinished())
+      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 83){
+      board.keystrokes += "3"
       board.movePieces('down')
-      console.log(board.isGameFinished())
+      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
-  })  
+    console.log(board.keystrokes.length)
+  })
+  return this.keystrokes
 }
 
 Board.prototype.movePieces = function(direction){
@@ -121,13 +124,12 @@ Board.prototype.isGameFinished = function(){
       if(aPiece === undefined){
         aPiece = pieces[i]
       }
-      // aPiece |= pieces[i]
-      // console.log(aPiece)
       if(!this.onSameCoordinates(aPiece, pieces[i])){
         return false
       }
     }
   }
+  console.log(this.keystrokes)
   return true
 }
 

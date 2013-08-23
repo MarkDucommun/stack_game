@@ -22,7 +22,7 @@ Level.prototype.createPieces = function(piecesData){
 
 Level.prototype.createPiece = function(pieceData){
   var e = eval
-  var piece = e('new ' + pieceData['type'] 
+  var piece = e('new ' + pieceData['piece'] 
       + '(' + pieceData['x'] + ',' + pieceData['y'] + ')')
   return piece
 }
