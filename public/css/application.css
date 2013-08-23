@@ -4,11 +4,17 @@
   width: 100%;
 }
 
+.create {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+
 .board {
+  position: relative;
   margin: 2% 10%;
   width: 80%;
   height: 70%;
-  position: fixed;
 }
 
 .square {

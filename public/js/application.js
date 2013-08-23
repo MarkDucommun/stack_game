@@ -1,5 +1,17 @@
 $(document).ready(function() {
  
+  // $(window).resize(function(){
+  //   var height = $('.level').css('height')
+  //   var board_height = parseInt(height, 10) * 0.7 + 'px'
+  //   console.log(board_height)
+  //   $('.board')
+  //     .css('height', board_height)
+  //     .css('weight', '80%')
+  //   $('.square')
+  //     .css('height', )
+  //     .css('width')
+  // })
+
   // if(location.href === '/level/'){
     var id = $('.level').data('level')
     $.get('/level_data/' + id, function(levelData){
@@ -21,7 +33,7 @@ $(document).ready(function() {
   })
 
   $('#retry').click(function(){
-    
+
   })
 
   $('#create_grid').click(function(event){
@@ -29,8 +41,8 @@ $(document).ready(function() {
     $(this).parent('form').hide()
     $('.create').append('<div class="board"></div>')
     var size = {}
-    size['x'] = $('input[name="x"]').val()
-    size['y'] = $('input[name="y"]').val()
+    size['x'] = $('input[name="d"]').val()
+    size['y'] = $('input[name="d"]').val()
     name = $('input[name="name"]').val()
    
     var util = new ScreenUtil(size, true)
