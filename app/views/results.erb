@@ -1,0 +1,10 @@
+<div>
+    <ul class="puzzles">
+    <% @games.each do |game| %>
+      <li>
+          <%= game.user.name %> - <%= game.user.keystrokes.length %>
+      </li>
+    <% end %>
+  </ul>
+  <button id="retry">Retry</button>
+</div>

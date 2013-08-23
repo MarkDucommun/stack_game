@@ -5,41 +5,37 @@ function Board(levelData){
 
 Board.prototype.setupBoard = function(levelData){
   this.level = new Level(levelData)
-  this.screenUtil = new ScreenUtil(levelData['size'])
+  this.screenUtil = new ScreenUtil(levelData['size'], false)
   this.screenUtil.colorGrid(this.packageLevel())
 }
 
 Board.prototype.startPlay = function(){
   var board = this
   this.keystrokes = ""
+ 
   $(document).keyup(function(e){
     if(e.keyCode == 65){
       board.keystrokes += "0"
       board.movePieces('left')
-      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 87){
       board.keystrokes += "1"
       board.movePieces('up')
-      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 68){
       board.keystrokes += "2"
       board.movePieces('right')
-      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
     if(e.keyCode == 83){
       board.keystrokes += "3"
       board.movePieces('down')
-      board.isGameFinished()
       board.screenUtil.colorGrid(board.packageLevel())
     }
-    console.log(board.keystrokes.length)
+    board.isGameFinished()
   })
-  return this.keystrokes
 }
 
 Board.prototype.movePieces = function(direction){
@@ -129,8 +125,11 @@ Board.prototype.isGameFinished = function(){
       }
     }
   }
-  console.log(this.keystrokes)
-  return true
+  $(document).unbind('keyup')
+  $.post('/game/' + $('.level').data('level'), {keystrokes: this.keystrokes}, function(game_id){
+    
+    location.href = '/results/' + $('.level').data('level')
+  })
 }
 
 Board.prototype.onSameCoordinates = function(pieceA, pieceB){

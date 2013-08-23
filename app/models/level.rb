@@ -15,4 +15,18 @@ class Level < ActiveRecord::Base
     end
     level_data.to_json
   end
+
+  def self.create_from_level_data(level_data)
+    level = Level.new(name: level_data[:name],
+                         x_dimension: level_data[:size][:x],
+                         y_dimension: level_data[:size][:y])
+    level_data[:pieces].each do |key, piece|
+      piece = Piece.find_or_initialize_by_x_and_y_and_piece(x: piece[:x],
+                                                            y: piece[:y],
+                                                            piece: piece[:piece])
+      level.pieces << piece
+    end
+    level.save
+    return level
+  end
 end

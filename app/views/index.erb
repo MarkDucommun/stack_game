@@ -1,2 +1,12 @@
-<div class="board">
+<div>
+  <ul class="puzzles">
+    <% @levels.each do |level| %>
+      <li>
+        <a href="/level/<%= level.id %>">
+          <%= level.name %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+  <button id="create">Create Puzzle</button>
 </div>

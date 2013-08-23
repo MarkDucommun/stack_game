@@ -1,31 +1,59 @@
-var board = undefined
-
 $(document).ready(function() {
+ 
+  // if(location.href === '/level/'){
+    var id = $('.level').data('level')
+    $.get('/level_data/' + id, function(levelData){
+      board = new Board(levelData)
+    }, 'json')
+  // }
 
-  // levelData = { size: { x: 8, y: 8 },
-  //               pieces : [{x: 0, y: 0, piece: 'Movable'},
-  //                         {x: 1, y: 3, piece: 'Movable'},
-  //                         {x: 2, y: 0, piece: 'Movable'},
-  //                         {x: 6, y: 3, piece: 'Movable'},
-  //                         {x: 7, y: 6, piece: 'Movable'},
-  //                         {x: 2, y: 0, piece: 'Movable'},
-  //                         {x: 2, y: 0, piece: 'Movable'},
-  //                         {x: 5, y: 1, piece: 'Fixed'},
-  //                         {x: 4, y: 2, piece: 'Fixed'},
-  //                         {x: 7, y: 2, piece: 'Fixed'},
-  //                         {x: 2, y: 5, piece: 'Fixed'},
-  //                         {x: 2, y: 3, piece: 'Fixed'},
-  //                         {x: 4, y: 3, piece: 'Fixed'},
-  //                         {x: 4, y: 4, piece: 'Fixed'},
-  //                         {x: 7, y: 5, piece: 'Fixed'},
-  //                         {x: 2, y: 6, piece: 'Fixed'},
-  //                         {x: 6, y: 6, piece: 'Fixed'},
-  //                         {x: 2, y: 7, piece: 'Fixed'}]}
+  $('#create').click(function(event){
+    
+  })
 
-  // console.log(levelData)
-  //               new Board(levelData)
+  $('#create_grid').click(function(event){
+    event.preventDefault()
+    $(this).parent('form').hide()
+    $('.create').append('<div class="board"></div>')
+    var size = {}
+    size['x'] = $('input[name="x"]').val()
+    size['y'] = $('input[name="y"]').val()
+    name = $('input[name="name"]').val()
+   
+    var util = new ScreenUtil(size, true)
+    
+    var pieces = []
+    
+    var button = $('<button id="push_grid">Create Grid</button>').click(function(event){
+      $.each($('.square'), function(i, div){
+        piece = piecify(div)
+        if(piece['piece'] !== 'none'){
+          pieces.push(piece)
+        }
+      })
+      $.post('/create', {size: size, pieces: pieces, name: name}, function(level_id){
+        location.href = '/level/' + level_id
+      })
+    })
 
-  // levelData = { size: { x: 2, y: 2 },
-  //               pieces : [{x: 0, y: 0, type: 'Movable'},
-  //                         {x: 1, y: 1, type: 'Movable'}]}
+    $('.create').append(button)
+
+    function piecify(div){
+      var piece = {}
+      piece['piece'] = $(div).data('piece')
+      if(piece['piece'] !== 'none'){
+        piece['x'] = getPositionX( parseInt( $(div).attr('id').slice(2), 10))
+        piece['y'] = getPositionY( parseInt( $(div).attr('id').slice(2), 10))
+      }
+      return piece
+    }
+
+    function getPositionX(id){
+      return id % size['x']
+    }
+
+    function getPositionY(id){
+      return Math.floor( id / size['y'])
+    }
+  })
 });

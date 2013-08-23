@@ -1,9 +1,9 @@
-function ScreenUtil(levelDimensions){
+function ScreenUtil(levelDimensions, create){
   this.setGridCharacteristics(levelDimensions)
-  this.appendGrid()
+  this.appendGrid(create)
 }
 
-var borders = 20
+var borders = 10
 
 ScreenUtil.prototype.setGridCharacteristics = function(levelDimensions){
   this.setDimensionX(levelDimensions['x'])
@@ -13,9 +13,9 @@ ScreenUtil.prototype.setGridCharacteristics = function(levelDimensions){
   this.setSquareHeight()
 }
 
-ScreenUtil.prototype.appendGrid = function(){
+ScreenUtil.prototype.appendGrid = function(create){
   for(var i = 0; i < this.getNumDivs(); i++){
-    $('.board').append(this.createDiv(i))
+    $('.board').append(this.createDiv(i, create))
   }
 }
 
@@ -30,7 +30,7 @@ ScreenUtil.prototype.colorDiv = function(pieceData, index, array){
   $('#sq' + divID).css('background', color)
 }
 
-ScreenUtil.prototype.createDiv = function(id){
+ScreenUtil.prototype.createDiv = function(id, create){
   var width = this.getSquareWidth()
   var height = this.getSquareHeight()
   var xPos = this.getPositionX(id) 
@@ -41,7 +41,26 @@ ScreenUtil.prototype.createDiv = function(id){
     .css('height', height)
     .css('left', (width + borders) * xPos)
     .css('bottom', (height + borders) * yPos)
- 
+   
+  if(create){
+    square.data('piece', 'none')
+    square.click(function(){
+      var piece = square.data('piece')
+      if (piece === 'none'){
+        $(this).css('background', 'red')
+        $(this).data('piece', 'Movable')
+      }
+      else if(piece === 'Movable'){
+        $(this).css('background', 'black')
+        $(this).data('piece', 'Fixed')
+      }
+      else{
+        $(this).css('background', 'none')
+        $(this).data('piece', 'none')
+      }
+    })
+  }
+
   return square
 }
 
