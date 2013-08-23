@@ -84,6 +84,10 @@ li:hover {
   left: 80%;
 }
 
+#sign_in {
+  height: 3em;
+}
+
 #retry {
   position: fixed;
   top: 80%;
