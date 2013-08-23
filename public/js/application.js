@@ -7,7 +7,20 @@ $(document).ready(function() {
     }, 'json')
   // }
 
+  $('#sign_in').click(function(){
+    location.href = '/sign_in'
+  })
+
+  $('#sign_out').click(function(){
+    location.href = '/sign_out'
+  })
+
   $('#create').click(function(event){
+    event.preventDefault()
+    location.href = '/create'
+  })
+
+  $('#retry').click(function(){
     
   })
 
@@ -32,6 +45,7 @@ $(document).ready(function() {
         }
       })
       $.post('/create', {size: size, pieces: pieces, name: name}, function(level_id){
+        console.log(level_id)
         location.href = '/level/' + level_id
       })
     })

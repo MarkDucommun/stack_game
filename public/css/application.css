@@ -1,7 +1,7 @@
 .board {
   margin: 20px auto;
-  width: 800px;
-  height: 800px;
+  width: 50em;
+  height: 50em;
   position: relative;
 }
 
@@ -76,4 +76,16 @@ li:hover {
   text-align: center;
   top: 5%;
   left: 35.5%;
+}
+
+#sign_in, #sign_out {
+  position: fixed;
+  top: 3%;
+  left: 80%;
+}
+
+#retry {
+  position: fixed;
+  top: 80%;
+  left: 44%;
 }

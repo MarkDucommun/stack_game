@@ -1,4 +1,9 @@
 <div>
+  <% if @user %>
+    <button id="sign_out">Sign Out</button>  
+  <% else %>
+    <img id="sign_in" src="https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png"/>
+  <% end %>
   <ul class="puzzles">
     <% @levels.each do |level| %>
       <li>

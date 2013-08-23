@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :games
   has_many :levels, through: :games
-  has_many :created_games
+  has_many :created_levels, class_name: 'Level' 
 
   def get_client
     client = Twitter::REST::Client.new do |config|

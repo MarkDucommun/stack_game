@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/sferik/twitter.git
+  revision: 8faa15309d906dd46fccc1b914ea4aa7a5da7c2d
+  specs:
+    twitter (4.8.1)
+      celluloid (~> 0.14.0)
+      faraday (~> 0.8, < 0.10)
+      simple_oauth (~> 0.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -15,14 +24,20 @@ GEM
     arel (3.0.2)
     backports (2.6.1)
     builder (3.0.4)
+    celluloid (0.14.1)
+      timers (>= 1.0.0)
     daemons (1.1.9)
     diff-lcs (1.1.3)
     eventmachine (1.0.0)
     eventmachine (1.0.0-x86-mingw32)
     faker (1.1.2)
       i18n (~> 0.5)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
     i18n (0.6.1)
     multi_json (1.6.1)
+    multipart-post (1.2.0)
+    oauth (0.4.7)
     pg (0.14.1)
     pg (0.14.1-x86-mingw32)
     rack (1.5.2)
@@ -41,6 +56,7 @@ GEM
     rspec-mocks (2.12.2)
     shotgun (0.9)
       rack (>= 1.0)
+    simple_oauth (0.2.0)
     sinatra (1.3.4)
       rack (~> 1.4)
       rack-protection (~> 1.3)
@@ -57,6 +73,7 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     tilt (1.3.3)
+    timers (1.1.0)
     tzinfo (0.3.35)
 
 PLATFORMS
@@ -67,6 +84,7 @@ DEPENDENCIES
   activerecord
   activesupport
   faker
+  oauth
   pg
   rake
   rspec
@@ -74,3 +92,4 @@ DEPENDENCIES
   sinatra
   sinatra-contrib
   thin
+  twitter!

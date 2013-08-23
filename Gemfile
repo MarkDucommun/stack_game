@@ -17,6 +17,9 @@ gem 'rake'
 
 gem 'shotgun'
 
+gem 'oauth'
+gem 'twitter', :git => 'https://github.com/sferik/twitter.git'
+
 group :test do
   gem 'faker'
   gem 'rspec'
