@@ -37,6 +37,8 @@ Board.prototype.startPlay = function(){
     board.isGameFinished()
   })
 
+  $(document).on('touchmove', false)
+
   $(document).swipe({
     swipe:function(event, direction){
       console.log(direction)
