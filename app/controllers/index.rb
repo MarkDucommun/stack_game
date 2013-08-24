@@ -37,9 +37,9 @@ get '/create' do
 end
 
 post '/create' do
-  level = Level.create_from_level_data(params)
-  User.find(session[:user_id]).created_levels << level if session[:user_id]
-  User.find(1).created_levels << level unless session[:user_id]
+  user_id = 1
+  user_id = session[:user_id] if session[:user_id]
+  level = Level.create_from_level_data(params, user_id)
   return level.id.to_s
 end
 

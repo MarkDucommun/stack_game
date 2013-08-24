@@ -12,12 +12,6 @@ $(document).ready(function() {
   //     .css('width')
   // })
 
-  $(document).swipe({
-    swipeRight:function(){
-      console.log("swiped right")
-    }
-  })
-
   // if(location.href === '/level/'){
     var id = $('.level').data('level')
     $.get('/level_data/' + id, function(levelData){

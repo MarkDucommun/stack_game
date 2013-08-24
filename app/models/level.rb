@@ -5,7 +5,7 @@ class Level < ActiveRecord::Base
   has_many :level_pieces
   has_many :pieces, through: :level_pieces
 
-  validates_presence_of :user, :name, :x_dimension, :y_dimension
+  validates_presence_of :name, :x_dimension, :y_dimension
 
   def self.get_level_data(level_id)
     level = self.find(level_id)
@@ -18,7 +18,7 @@ class Level < ActiveRecord::Base
     level_data.to_json
   end
 
-  def self.create_from_level_data(level_data)
+  def self.create_from_level_data(level_data, user_id)
     level = Level.new(name: level_data[:name],
                          x_dimension: level_data[:size][:x],
                          y_dimension: level_data[:size][:y])
@@ -27,7 +27,8 @@ class Level < ActiveRecord::Base
                                                             y: piece[:y],
                                                             piece: piece[:piece])
       level.pieces << piece
-    end
+    end 
+    User.find(user_id).created_levels << level
     level.save
     return level
   end

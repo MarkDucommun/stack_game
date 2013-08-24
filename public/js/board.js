@@ -36,6 +36,21 @@ Board.prototype.startPlay = function(){
     }
     board.isGameFinished()
   })
+
+  $(document).swipe({
+    swipe:function(event, direction){
+      console.log(direction)
+      board.movePieces(direction)
+      switch(direction){
+        case 'left': board.keystrokes += "0"; break;
+        case 'up': board.keystrokes += "1"; break;
+        case 'right': board.keystrokes += "2"; break;
+        case 'down': board.keystrokes += "3"; break;
+      }
+      board.screenUtil.colorGrid(board.packageLevel())
+      board.isGameFinished()
+    }
+  })
 }
 
 Board.prototype.movePieces = function(direction){
