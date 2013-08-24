@@ -2,7 +2,7 @@
     <ul class="puzzles">
     <% @games.each do |game| %>
       <li>
-          <%= game.user.username %> - <%= game.keystrokes.length %>
+          <%= game.user.id %> - <%= game.keystrokes.length %>
       </li>
     <% end %>
   </ul>

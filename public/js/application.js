@@ -8,7 +8,7 @@ $(document).ready(function() {
   //     .css('height', board_height)
   //     .css('weight', '80%')
   //   $('.square')
-  //     .css('height', )
+  //     .css('height', height / # of elements x)
   //     .css('width')
   // })
 

@@ -5,6 +5,8 @@ class Level < ActiveRecord::Base
   has_many :level_pieces
   has_many :pieces, through: :level_pieces
 
+  validates_presence_of :user, :name, :x_dimension, :y_dimension
+
   def self.get_level_data(level_id)
     level = self.find(level_id)
     level_data = {}

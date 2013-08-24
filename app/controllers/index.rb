@@ -1,6 +1,6 @@
 get '/' do
-  @user = session[:user_id]
-  @levels = Level.all.sample(10) 
+  @user = session[:user_id] if session[:user_id]
+  @levels = Level.all.sample(10) if Level.all
   erb :index
 end
 
@@ -17,6 +17,7 @@ get '/results/:level_id' do
   puts params
   @level_id = params[:level_id]
   @games = Level.find(params[:level_id]).games.all
+  puts @games
   erb :results
 end
 
@@ -26,7 +27,7 @@ post '/game/:level_id' do
   if session[:user_id]
     game = User.find(session[:user_id]).games.create(level: level, keystrokes: params[:keystrokes]) 
   else
-    game = Game.create(level: level, keystrokes: params[:keystrokes])
+    game = User.find(1).games.create(level: level, keystrokes: params[:keystrokes])
   end
   return game.id.to_s
 end
@@ -36,9 +37,9 @@ get '/create' do
 end
 
 post '/create' do
-  puts params
   level = Level.create_from_level_data(params)
   User.find(session[:user_id]).created_levels << level if session[:user_id]
+  User.find(1).created_levels << level unless session[:user_id]
   return level.id.to_s
 end
 
@@ -60,4 +61,10 @@ get '/auth' do
     oauth_secret: access_token.secret) 
   session[:user_id] = user.id
   redirect '/'
+end
+
+get '/session_user' do
+  if session[:user_id]
+    return session[:user_id]
+  end
 end
