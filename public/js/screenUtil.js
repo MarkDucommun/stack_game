@@ -13,6 +13,7 @@ ScreenUtil.prototype.setGridCharacteristics = function(levelDimensions){
 
 ScreenUtil.prototype.appendGrid = function(create){
   $('.board').data('dimension', this.getDimensionX())
+  $('.board').data('border', this.getBorder())
   for(var i = 0; i < this.getNumDivs(); i++){
     $('.board').append(this.createDiv(i, create))
   }
@@ -99,7 +100,7 @@ ScreenUtil.prototype.setSquareWidth = function(){
 }
 
 ScreenUtil.prototype.getBorder = function(){
-  return 10
+  return 8
 }
 
 ScreenUtil.prototype.getSquareHeight = function(){

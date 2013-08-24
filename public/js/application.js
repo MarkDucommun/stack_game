@@ -1,5 +1,7 @@
 $(document).ready(function() {
-
+  
+  buttons()
+  
   // if(location.href === '/level/'){
     var id = $('.level').data('level')
     $.get('/level_data/' + id, function(levelData){
@@ -9,12 +11,15 @@ $(document).ready(function() {
     }, 'json')
   // }
 
+  dynamic_resize()
+
   $('#create_grid').click(function(event){
     event.preventDefault()
    
     $(this).parent('form').hide()
    
     $('.create').append('<div class="board"></div>')
+    
     resize_board()
 
     var size = {}

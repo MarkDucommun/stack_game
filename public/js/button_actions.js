@@ -1,3 +1,4 @@
+var buttons = function(){ 
  $('#sign_in').click(function(){
     location.href = '/sign_in'
   })
@@ -14,3 +15,4 @@
   $('#retry').click(function(){
     
   })
+}
