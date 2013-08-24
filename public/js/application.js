@@ -1,62 +1,33 @@
 $(document).ready(function() {
- 
-  // $(window).resize(function(){
-  //   var height = $('.level').css('height')
-  //   var board_height = parseInt(height, 10) * 0.7 + 'px'
-  //   console.log(board_height)
-  //   $('.board')
-  //     .css('height', board_height)
-  //     .css('weight', '80%')
-  //   $('.square')
-  //     .css('height', height / # of elements x)
-  //     .css('width')
-  // })
 
   // if(location.href === '/level/'){
     var id = $('.level').data('level')
     $.get('/level_data/' + id, function(levelData){
-      $('.board').css('width', $('.board').css('height'))
+      $('div').append('<div class="board"></div>')
+      resize_board()
       board = new Board(levelData)
     }, 'json')
   // }
 
-  $('#sign_in').click(function(){
-    location.href = '/sign_in'
-  })
-
-  $('#sign_out').click(function(){
-    location.href = '/sign_out'
-  })
-
-  $('#create').click(function(event){
-    event.preventDefault()
-    location.href = '/create'
-  })
-
-  $('#retry').click(function(){
-
-  })
-
   $('#create_grid').click(function(event){
     event.preventDefault()
+   
     $(this).parent('form').hide()
+   
     $('.create').append('<div class="board"></div>')
+    resize_board()
+
     var size = {}
     size['x'] = $('input[name="d"]').val()
     size['y'] = $('input[name="d"]').val()
     name = $('input[name="name"]').val()
 
-    var box_height = parseInt($('.board').css('height'), 10)
-    var screen_width = parseInt($('.create').css('width'), 10)
-    var left_margin = (screen_width - box_height) / 2
-    var button_left = (screen_width / 2) - 50
-    $('.board')
-      .css('width', box_height + 'px')
-      .css('margin-left', left_margin + 'px')
-
     var util = new ScreenUtil(size, true)
     
     var pieces = []
+
+    var box_height = parseInt($('.board').css('height'), 10)
+    var screen_width = parseInt($('.create').css('width'), 10)    
     
     var button = $('<button id="push_grid">Create Grid</button>')
       .css('left', button_left)

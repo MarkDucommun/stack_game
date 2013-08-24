@@ -14,22 +14,22 @@ Board.prototype.startPlay = function(){
   this.keystrokes = ""
  
   $(document).keyup(function(e){
-    if(e.keyCode == 65){
+    if(e.keyCode == 65 || e.keyCode == 37){
       board.keystrokes += "0"
       board.movePieces('left')
       board.screenUtil.colorGrid(board.packageLevel())
     }
-    if(e.keyCode == 87){
+    if(e.keyCode == 87 || e.keyCode == 38){
       board.keystrokes += "1"
       board.movePieces('up')
       board.screenUtil.colorGrid(board.packageLevel())
     }
-    if(e.keyCode == 68){
+    if(e.keyCode == 68 || e.keyCode == 39){
       board.keystrokes += "2"
       board.movePieces('right')
       board.screenUtil.colorGrid(board.packageLevel())
     }
-    if(e.keyCode == 83){
+    if(e.keyCode == 83 || e.keyCode == 40){
       board.keystrokes += "3"
       board.movePieces('down')
       board.screenUtil.colorGrid(board.packageLevel())

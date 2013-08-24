@@ -1,6 +1,7 @@
 .level {
   position: fixed;
   height: 100%;
+  width: 100%;
 }
 
 .create {
@@ -11,14 +12,13 @@
 
 .board {
   position: relative;
-  margin: 2% 10%;
-  height: 70%;
 }
 
 .square {
   position: absolute;
-  border: 1px solid black;
-  border-radius: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 10%;
+  box-shadow: 0.5px 3px 5px grey;
 }
 
 button, #create_grid,
