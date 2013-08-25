@@ -37,6 +37,18 @@ Board.prototype.startPlay = function(){
     board.isGameFinished()
   })
 
+  document.body.addEventListener('touchmove', function(event) {
+    event.preventDefault();
+  }, false);
+ 
+  window.onresize = function() {
+    $(document.body).width(window.innerWidth).height(window.innerHeight);
+  }
+
+  $(function() {
+    window.onresize();
+  });
+
   $(document).swipe({
     swipe:function(event, direction){
       console.log(direction)
