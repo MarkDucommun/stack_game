@@ -77,13 +77,6 @@ li:hover {
   background-color: lightgrey;
 }
 
-.puzzles {
-  position: fixed;
-  text-align: center;
-  top: 5%;
-  left: 35.5%;
-}
-
 #sign_in, #sign_out {
   position: fixed;
   top: 3%;
@@ -98,4 +91,16 @@ li:hover {
   position: fixed;
   top: 80%;
   left: 44%;
+}
+
+.scrollbox {
+  overflow:auto;
+  overflow-x:hidden;
+  height: 710px;
+  width: 90%;
+  margin: auto;
+  position: absolute;
+}
+
+ul {
 }

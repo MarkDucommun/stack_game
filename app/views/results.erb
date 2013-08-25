@@ -1,10 +1,13 @@
-<div data-id="<%=  %>"></div>
+<div data-id="<%= @level_id %>" class="results">
+  <div class="scrollbox">
     <ul class="puzzles">
-    <% @games.each do |game| %>
-      <li>
-          <%= game.user.username %> - <%= game.keystrokes.length %>
-      </li>
-    <% end %>
-  </ul>
+      <% @games.each do |game| %>
+        <li>
+            <%= game.user.username %> - <%= game.keystrokes.length %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
   <button id="retry">Retry</button>
+  <button id="home">Home</button>
 </div>

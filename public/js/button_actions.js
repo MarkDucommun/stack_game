@@ -13,10 +13,10 @@ var buttons = function(){
   })
 
   $('#retry').click(function(){
-    
+    location.href = '/level/' + $('.results').data('id')
   })
 
-   $('#create_grid').click(function(event){
+  $('#create_grid').click(function(event){
     
     event.preventDefault()
     $(this).parent('form').hide()

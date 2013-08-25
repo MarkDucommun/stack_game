@@ -1,16 +1,16 @@
 function PushGridButton(name, size){
   var button = $('<button id="push_grid">Create</button>')
     .click(function(){
-      var pieces = collectPieces()
+      var pieces = collectPieces(size['x'])
       postGrid(name, size, pieces)
     })
   return button
 }
 
-function collectPieces(){
+function collectPieces(size){
   var pieces = []
   $.each($('.square'), function(i, div){
-    piece = piecify(i, div)
+    piece = piecify(i, div, size)
     if(piece['piece'] !== 'none'){
       pieces.push(piece)
     }
@@ -18,12 +18,12 @@ function collectPieces(){
   return pieces
 }
 
-function piecify(i, div){
+function piecify(i, div, size){
   var piece = {}
   piece['piece'] = $(div).data('piece')
   if(piece['piece'] !== 'none'){
-    piece['x'] = getPositionX(i)
-    piece['y'] = getPositionY(i)
+    piece['x'] = getPositionX(i, size)
+    piece['y'] = getPositionY(i, size)
   }
   return piece
 }
@@ -35,9 +35,9 @@ function postGrid(name, size, pieces){
 }
 
 function getPositionX(id, dimension){
-  return id % size['x']
+  return id % dimension
 }
 
 function getPositionY(id, dimension){
-  return Math.floor( id / size['y'])
+  return Math.floor( id / dimension)
 }
