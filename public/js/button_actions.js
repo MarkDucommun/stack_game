@@ -13,8 +13,11 @@ var buttons = function(){
   })
 
   $('#retry').click(function(){
-    console.log("CLICK")
     location.href = '/level/' + $('.results').data('id')
+  })
+
+  $('#home').click(function(){
+    location.href = '/'
   })
 
   $('#create_grid').click(function(event){
