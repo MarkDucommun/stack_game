@@ -55,7 +55,7 @@ var resize_push_grid_button = function(){
   var fontsize = button_dimension * 0.2
   
   if(screen_width < screen_height){
-    var top = board_dimension
+    var top = (screen_height - board_dimension) / 2 + board_dimension
     var left = (screen_width - button_dimension) / 2
   }
   else{
