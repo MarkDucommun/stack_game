@@ -16,8 +16,7 @@ end
 get '/results/:level_id' do
   puts params
   @level_id = params[:level_id]
-  @games = Level.find(params[:level_id]).games.all
-  puts @games
+  @games = Level.find(params[:level_id]).games.order(:score)
   erb :results
 end
 

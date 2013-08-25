@@ -4,6 +4,7 @@ var dynamic_resize = function(){
     resize_board()
     resize_push_grid_button()
     resize_squares()
+    resize_result_buttons()
   })
 }
 
@@ -68,15 +69,54 @@ var resize_push_grid_button = function(){
 }
 
 var resize_scroll = function(){
-  var ul_width = screen_width() * 0.6
-  var ul_height = screen_height() * 0.8
+  var ul_width
+  var ul_height
+  var top
+  var left
+  if(screen_width() < 850){
+    ul_height = screen_height() * 0.75
+    ul_width = screen_width() * 0.8
+    top = 20
+    left = (screen_width() - ul_width) / 2
+  }
+  else{  
+    ul_height = screen_height() * 0.9
+    ul_width = 600
+    top = (screen_height() - ul_height) / 2
+    left = (screen_width() - 600) / 2 
+  }
   var left = (screen_width() - ul_width) / 2
-  var top = (screen_height() - ul_height) / 2
   $('.scrollbox')
     .css('width', ul_width + 'px')
     .css('height', ul_height + 'px')
     .css('left', left + 'px')
     .css('top', top + 'px')
+}
+
+var resize_result_buttons = function(){
+  var retry_top
+  var retry_left
+  var home_top
+  var home_left
+  var margin = (screen_width() - 600) / 2
+  if(screen_width() < 850){
+    retry_top = screen_height() * 0.75 + 50
+    retry_left = (screen_width() / 2) + 20
+    home_top = screen_height() * 0.75 + 50
+    home_left = (screen_width() / 2) - 120
+  }
+  else{
+    retry_top = (screen_height() - 100) / 2
+    retry_left = margin + 600 + 25
+    home_top = (screen_height() - 100) / 2
+    home_left = margin - 125
+  }
+  $('#retry')
+    .css('top', retry_top + 'px')
+    .css('left', retry_left + 'px')
+  $('#home')
+    .css('top', home_top + 'px')
+    .css('left', home_left + 'px')
 }
 
 var getPositionX = function(id, dimension){

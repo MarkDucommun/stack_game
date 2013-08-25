@@ -93,12 +93,6 @@ li:hover {
   height: 3em;
 }
 
-#retry {
-  position: fixed;
-  top: 80%;
-  left: 44%;
-}
-
 .scrollbox {
   overflow:auto;
   overflow-x:hidden;
