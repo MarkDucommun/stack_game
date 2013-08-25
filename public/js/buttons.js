@@ -1,5 +1,5 @@
 function PushGridButton(name, size){
-  var button = $('<button id="push_grid">Create Grid</button>')
+  var button = $('<button id="push_grid">Create</button>')
     .click(function(){
       var pieces = collectPieces()
       postGrid(name, size, pieces)

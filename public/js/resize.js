@@ -51,7 +51,7 @@ var resize_push_grid_button = function(){
   var screen_width = parseInt($('.board').parent().css('width'), 10)
   var screen_height = parseInt($('.board').parent().css('height'), 10)
   var board_dimension = parseInt($('.board').css('height'), 10)
-  var button_dimension = board_dimension * 0.15
+  var button_dimension = board_dimension * 0.2
   var fontsize = button_dimension * 0.2
   
   if(screen_width < screen_height){
