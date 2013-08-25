@@ -12,20 +12,10 @@ var resize_board = function(){
   var board_dimension
   
   if(screen_width < screen_height){
-    if($('#push_grid').length && screen_width > screen_height * 0.75){
-      board_dimension = screen_width * 0.7
-    }
-    else{
-      board_dimension = screen_width * 0.9
-    }
+    board_dimension = screen_width * 0.9
   }
   else{
-    if($('#push_grid').length && screen_width * 0.8 < screen_height){
-      board_dimension = screen_height * 0.7
-    }
-    else{   
-      board_dimension = screen_height * 0.9
-    }
+    board_dimension = screen_height * 0.9
   }
   
   var left_margin = (screen_width - board_dimension) / 2
@@ -62,14 +52,23 @@ var resize_push_grid_button = function(){
   var screen_height = parseInt($('.board').parent().css('height'), 10)
   var board_dimension = parseInt($('.board').css('height'), 10)
   var button_dimension = board_dimension * 0.15
-  var top = (screen_height - button_dimension) / 2
-  var left = ((screen_width - board_dimension) / 2 - button_dimension) / 2
-  console.log("HERE")
+  var fontsize = button_dimension * 0.2
+  
+  if(screen_width < screen_height){
+    var top = board_dimension
+    var left = (screen_width - button_dimension) / 2
+  }
+  else{
+    var top = (screen_height - button_dimension) / 2
+    var left = ((screen_width - board_dimension) / 2 - button_dimension) / 2
+  }
+
   $('#push_grid')
     .css('height', button_dimension + 'px')
     .css('width', button_dimension + 'px')
     .css('top', top + 'px')
     .css('left', left + 'px')
+    .css('font-size', fontsize + 'px')
 }
 
 var getPositionX = function(id, dimension){
