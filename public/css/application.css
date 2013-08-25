@@ -18,16 +18,17 @@
   position: absolute;
   border: 1px solid lightgrey;
   border-radius: 10%;
-  box-shadow: 0.5px 3px 5px grey;
+  /*box-shadow: 0.5px 3px 5px grey;*/
 }
 
 button, #create_grid,
 #create {
   border: 1px solid black;
-  border-radius: 100%;
+  border-radius: 10%;
   height: 100px;
   width: 100px;
-  background: lightblue;
+  background: lightgrey;
+  position: absolute;
 }
 
 button:hover, #create_grid:hover,
@@ -54,10 +55,6 @@ button:hover, #create_grid:hover,
 #create_grid {
   position: absolute;
   left: 28%;
-}
-
-#push_grid {
-  position: fixed;
 }
 
 #create {
