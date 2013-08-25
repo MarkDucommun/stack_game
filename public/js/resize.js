@@ -1,5 +1,6 @@
 var dynamic_resize = function(){
   $(window).resize(function(){
+    resize_scroll()
     resize_board()
     resize_push_grid_button()
     resize_squares()
@@ -66,8 +67,16 @@ var resize_push_grid_button = function(){
     .css('font-size', fontsize + 'px')
 }
 
-var resize_ul = function(){
-
+var resize_scroll = function(){
+  var ul_width = screen_width() * 0.6
+  var ul_height = screen_height() * 0.8
+  var left = (screen_width() - ul_width) / 2
+  var top = (screen_height() - ul_height) / 2
+  $('.scrollbox')
+    .css('width', ul_width + 'px')
+    .css('height', ul_height + 'px')
+    .css('left', left + 'px')
+    .css('top', top + 'px')
 }
 
 var getPositionX = function(id, dimension){
@@ -79,11 +88,11 @@ var getPositionY = function(id, dimension){
 }
 
 var screen_width = function(){
-  return parseInt($('.board').parent().css('width'), 10)
+  return window.innerWidth
 }
 
 var screen_height = function(){
-  return parseInt($('.board').parent().css('height'), 10)
+  return window.innerHeight
 }
 
 var board_dimension = function(){
@@ -99,13 +108,9 @@ var pushGridExists = function(){
 }
 
 var buttonUnderGrid = function(){
-  console.log("Space " + sideMargin())
-  console.log("Button " + button_dimension())
   return sideMargin() < button_dimension()
 }
 
 var sideMargin = function(){
-  console.log("Screen Width " + screen_width())
-  console.log("Board Width " + board_dimension())
   return (screen_width() - board_dimension()) / 2
 }

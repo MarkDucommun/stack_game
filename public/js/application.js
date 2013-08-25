@@ -1,6 +1,7 @@
 $(document).ready(function() {
   
   buttons()
+  resize_scroll()
   
   if($('.level').length){
     var id = $('.level').data('level')

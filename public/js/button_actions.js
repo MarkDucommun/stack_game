@@ -13,6 +13,7 @@ var buttons = function(){
   })
 
   $('#retry').click(function(){
+    console.log("CLICK")
     location.href = '/level/' + $('.results').data('id')
   })
 

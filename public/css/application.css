@@ -1,3 +1,8 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+}
+
 .level {
   position: fixed;
   height: 100%;
@@ -67,6 +72,7 @@ li {
   list-style-type: none;
   margin: 1em;
   padding: 1em;
+  border: 1px solid black;
 }
 
 a {
@@ -96,11 +102,10 @@ li:hover {
 .scrollbox {
   overflow:auto;
   overflow-x:hidden;
-  height: 710px;
-  width: 90%;
-  margin: auto;
   position: absolute;
 }
 
 ul {
+  margin: 0;
+  padding: 0;
 }

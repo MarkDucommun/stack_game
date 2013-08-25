@@ -42,8 +42,7 @@ ScreenUtil.prototype.createDiv = function(id, create){
     .css('left', (width + this.getBorder()) * xPos)
     .css('bottom', (height + this.getBorder()) * yPos)
    
-  if(create
-    ){
+  if(create){
     square.data('piece', 'none')
     square.click(function(){
       var piece = square.data('piece')
