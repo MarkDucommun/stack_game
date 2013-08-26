@@ -90,7 +90,11 @@ li:hover {
 }
 
 #sign_in {
-  height: 3em;
+  padding: 25px 19px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 10%;
+  background: lightgrey;
 }
 
 .scrollbox {
