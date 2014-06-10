@@ -1,41 +1,41 @@
-var buttons = function(){ 
+var buttons = function(){
  $('#sign_in').click(function(){
-    location.href = '/sign_in'
-  })
+    location.href = '/sign_in';
+  });
 
   $('#sign_out').click(function(){
-    location.href = '/sign_out'
-  })
+    location.href = '/sign_out';
+  });
 
   $('#create').click(function(event){
-    event.preventDefault()
-    location.href = '/create'
-  })
+    event.preventDefault();
+    location.href = '/create';
+  });
 
   $('#retry').click(function(){
-    location.href = '/level/' + $('.results').data('id')
-  })
+    location.href = '/level/' + $('.results').data('id');
+  });
 
   $('#home').click(function(){
-    location.href = '/'
-  })
+    location.href = '/';
+  });
 
   $('#create_grid').click(function(event){
-    
-    event.preventDefault()
-    $(this).parent('form').hide()
-    $('.create').append('<div class="board"></div>')
-    
-    resize_board()
 
-    var size = {}
-    size['x'] = $('input[name="d"]').val()
-    size['y'] = $('input[name="d"]').val()
-    name = $('input[name="name"]').val()
+    event.preventDefault();
+    $(this).parent('form').hide();
+    $('.create').append('<div class="board"></div>');
 
-    var util = new ScreenUtil(size, true)
-    
-    $('.create').append(new PushGridButton(name, size))
-    resize_push_grid_button()
-  })
-}
+    resize_board();
+
+    var size = {};
+    size['x'] = $('input[name="d"]').val();
+    size['y'] = $('input[name="d"]').val();
+    name = $('input[name="name"]').val();
+
+    var util = new ScreenUtil(size, true);
+
+    $('.create').append(new PushGridButton(name, size));
+    resize_push_grid_button();
+  });
+};

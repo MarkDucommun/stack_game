@@ -1,49 +1,49 @@
 function Board(levelData){
-  this.setupBoard(levelData)
-  this.startPlay()
+  this.setupBoard(levelData);
+  this.startPlay();
 }
 
 Board.prototype.setupBoard = function(levelData){
-  this.level = new Level(levelData)
-  this.screenUtil = new ScreenUtil(levelData['size'], false)
-  this.screenUtil.colorGrid(this.packageLevel())
-}
+  this.level = new Level(levelData);
+  this.screenUtil = new ScreenUtil(levelData['size'], false);
+  this.screenUtil.colorGrid(this.packageLevel());
+};
 
 Board.prototype.startPlay = function(){
-  var board = this
-  this.keystrokes = ""
- 
+  var board = this;
+  this.keystrokes = "";
+
   $(document).keyup(function(e){
     if(e.keyCode == 65 || e.keyCode == 37){
-      board.keystrokes += "0"
-      board.movePieces('left')
-      board.screenUtil.colorGrid(board.packageLevel())
+      board.keystrokes += "0";
+      board.movePieces('left');
+      board.screenUtil.colorGrid(board.packageLevel());
     }
     if(e.keyCode == 87 || e.keyCode == 38){
-      board.keystrokes += "1"
-      board.movePieces('up')
-      board.screenUtil.colorGrid(board.packageLevel())
+      board.keystrokes += "1";
+      board.movePieces('up');
+      board.screenUtil.colorGrid(board.packageLevel());
     }
     if(e.keyCode == 68 || e.keyCode == 39){
-      board.keystrokes += "2"
-      board.movePieces('right')
-      board.screenUtil.colorGrid(board.packageLevel())
+      board.keystrokes += "2";
+      board.movePieces('right');
+      board.screenUtil.colorGrid(board.packageLevel());
     }
     if(e.keyCode == 83 || e.keyCode == 40){
-      board.keystrokes += "3"
-      board.movePieces('down')
-      board.screenUtil.colorGrid(board.packageLevel())
+      board.keystrokes += "3";
+      board.movePieces('down');
+      board.screenUtil.colorGrid(board.packageLevel());
     }
-    board.isGameFinished()
-  })
+    board.isGameFinished();
+  });
 
   document.body.addEventListener('touchmove', function(event) {
     event.preventDefault();
   }, false);
- 
+
   window.onresize = function() {
     $(document.body).width(window.innerWidth).height(window.innerHeight);
-  }
+  };
 
   $(function() {
     window.onresize();
@@ -51,43 +51,43 @@ Board.prototype.startPlay = function(){
 
   $(document).swipe({
     swipe:function(event, direction){
-      console.log(direction)
-      board.movePieces(direction)
+      console.log(direction);
+      board.movePieces(direction);
       switch(direction){
         case 'left': board.keystrokes += "0"; break;
         case 'up': board.keystrokes += "1"; break;
         case 'right': board.keystrokes += "2"; break;
         case 'down': board.keystrokes += "3"; break;
       }
-      board.screenUtil.colorGrid(board.packageLevel())
-      board.isGameFinished()
+      board.screenUtil.colorGrid(board.packageLevel());
+      board.isGameFinished();
     }
-  })
-}
+  });
+};
 
 Board.prototype.movePieces = function(direction){
-  var pieces = this.level.getPieces()
-  for(i in pieces){
-    var piece = pieces[i]
+  var pieces = this.level.getPieces();
+  for(var i in pieces){
+    var piece = pieces[i];
     if(piece instanceof Movable){
-      this.movePiece(piece, direction)      
+      this.movePiece(piece, direction);
     }
-  } 
-}
+  }
+};
 
 Board.prototype.movePiece = function(piece, direction){
-  var potentialMove = this.calculateMove(piece, direction)
+  var potentialMove = this.calculateMove(piece, direction);
   if(this.noConflicts(potentialMove, this.level.getPieces())){
-    piece.setCoordinates(potentialMove)
+    piece.setCoordinates(potentialMove);
   }
-}
+};
 
 Board.prototype.noConflicts = function(potentialMove){
-  if(this.isOnBoard(potentialMove) 
+  if(this.isOnBoard(potentialMove)
     && this.isNotOnObstacle(potentialMove)){
-    return true
+    return true;
   }
-  return false
+  return false;
 }
 
 Board.prototype.isOnBoard = function(potentialMove){
@@ -95,9 +95,9 @@ Board.prototype.isOnBoard = function(potentialMove){
     && potentialMove['x'] < this.level.getDimensionX()
     && potentialMove['y'] >= 0
     && potentialMove['y'] < this.level.getDimensionY()){
-    return true
+    return true;
   }
-  return false
+  return false;
 }
 
 Board.prototype.isNotOnObstacle = function(potentialMove){
@@ -154,13 +154,13 @@ Board.prototype.isGameFinished = function(){
   }
   $(document).unbind('keyup')
   $.post('/game/' + $('.level').data('level'), {keystrokes: this.keystrokes}, function(game_id){
-    
+
     location.href = '/results/' + $('.level').data('level')
   })
 }
 
 Board.prototype.onSameCoordinates = function(pieceA, pieceB){
-  if(pieceA.getX() === pieceB.getX() 
+  if(pieceA.getX() === pieceB.getX()
     && pieceA.getY() === pieceB.getY()){
     return true
   }

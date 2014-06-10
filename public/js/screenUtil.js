@@ -1,47 +1,47 @@
 function ScreenUtil(levelDimensions, create){
-  this.setGridCharacteristics(levelDimensions)
-  this.appendGrid(create)
+  this.setGridCharacteristics(levelDimensions);
+  this.appendGrid(create);
 }
 
 ScreenUtil.prototype.setGridCharacteristics = function(levelDimensions){
-  this.setDimensionX(levelDimensions['x'])
-  this.setDimensionY(levelDimensions['y'])
-  this.setNumDivs(levelDimensions)
-  this.setSquareWidth()
-  this.setSquareHeight()
-}
+  this.setDimensionX(levelDimensions['x']);
+  this.setDimensionY(levelDimensions['y']);
+  this.setNumDivs(levelDimensions);
+  this.setSquareWidth();
+  this.setSquareHeight();
+};
 
 ScreenUtil.prototype.appendGrid = function(create){
-  $('.board').data('dimension', this.getDimensionX())
-  $('.board').data('border', this.getBorder())
+  $('.board').data('dimension', this.getDimensionX());
+  $('.board').data('border', this.getBorder());
   for(var i = 0; i < this.getNumDivs(); i++){
-    $('.board').append(this.createDiv(i, create))
+    $('.board').append(this.createDiv(i, create));
   }
-}
+};
 
 ScreenUtil.prototype.colorGrid = function(levelData){
-  $('.square').css('background', 'none')
-  levelData.forEach(this.colorDiv, this)
-}
+  $('.square').css('background', 'none');
+  levelData.forEach(this.colorDiv, this);
+};
 
 ScreenUtil.prototype.colorDiv = function(pieceData, index, array){
-  divID = this.getID(pieceData['x'], pieceData['y'])
-  color = pieceData['color']
-  $('#sq' + divID).css('background', color)
-}
+  divID = this.getID(pieceData['x'], pieceData['y']);
+  color = pieceData['color'];
+  $('#sq' + divID).css('background', color);
+};
 
 ScreenUtil.prototype.createDiv = function(id, create){
-  var width = this.getSquareWidth()
-  var height = this.getSquareHeight()
-  var xPos = this.getPositionX(id) 
-  var yPos = this.getPositionY(id)
- 
+  var width = this.getSquareWidth();
+  var height = this.getSquareHeight();
+  var xPos = this.getPositionX(id);
+  var yPos = this.getPositionY(id);
+
   var square = $('<div class="square" id="sq' + id + '"></div>')
     .css('width', width)
     .css('height', height)
     .css('left', (width + this.getBorder()) * xPos)
     .css('bottom', (height + this.getBorder()) * yPos)
-   
+
   if(create){
     square.data('piece', 'none')
     square.click(function(){

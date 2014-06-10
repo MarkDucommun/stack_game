@@ -1,7 +1,7 @@
 var dynamic_resize = function(){
   $(window).resize(function(){
-    resize_scroll()
-    resize_board()
+    resize_scroll();
+    resize_board();
     resize_push_grid_button()
     resize_squares()
     resize_result_buttons()
@@ -10,17 +10,17 @@ var dynamic_resize = function(){
 
 var resize_board = function(){
   var board_dimension
-  
+
   if(screen_width() < screen_height()){
     board_dimension = screen_width() * 0.9
   }
   else{
     board_dimension = screen_height() * 0.9
   }
-  
+
   var left_margin = (screen_width() - board_dimension) / 2
   var top_margin = (screen_height() - board_dimension) / 4
-  
+
   $('.board')
     .css('height', board_dimension + 'px')
     .css('width', board_dimension + 'px')
@@ -33,7 +33,7 @@ var resize_squares = function(){
   var num_squares = $('.board').data('dimension')
   var border = $('.board').data('border')
   var square_dimension = board_dimension / num_squares - border
-  
+
   $.each($('.square'), function(i, div){
     var xPos = getPositionX(i, num_squares)
     var yPos = getPositionY(i, num_squares)
@@ -50,7 +50,7 @@ var resize_squares = function(){
 var resize_push_grid_button = function(){
   var button_dimension = board_dimension() * 0.2
   var fontsize = button_dimension * 0.2
-  
+
   if(screen_width() < screen_height()){
     var top = (screen_height() - board_dimension()) / 3 + board_dimension()
     var left = (screen_width() - button_dimension) / 2
@@ -79,11 +79,11 @@ var resize_scroll = function(){
     top = 20
     left = (screen_width() - ul_width) / 2
   }
-  else{  
+  else{
     ul_height = screen_height() * 0.9
     ul_width = 600
     top = (screen_height() - ul_height) / 2
-    left = (screen_width() - 600) / 2 
+    left = (screen_width() - 600) / 2
   }
   var left = (screen_width() - ul_width) / 2
   $('.scrollbox')
